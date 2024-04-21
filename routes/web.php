@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +16,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get("/", [WebsiteController::class, "accueil"])->name('website.accueil');
+
+Route::get('/', [SiteController::class, 'accueil'])->name('accueil');
 Route::get('/register', [UserController::class, 'form_register']);
+Route::get('/login', [UserController::class, 'form_login']);
+
+Route::post('/register/traitement', [UserController::class, 'traitement_register']);
+Route::post('/login/traitement', [UserController::class, 'traitement_login']);
+Route::get('/profil', function(){ return view('website.profil'); });
+Route::get('/logout', [UserController::class, 'logout']);
+
